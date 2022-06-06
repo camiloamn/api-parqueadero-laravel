@@ -33,7 +33,7 @@ Route::post('/api/tipo/store',[App\Http\Controllers\TipoVehiculoController::clas
 Route::post('/api/tipo/show',[App\Http\Controllers\TipoVehiculoController::class,'show']);
 Route::post('/api/tipo/index',[App\Http\Controllers\TipoVehiculoController::class,'index']);
 Route::post('/api/tipo/destroy',[App\Http\Controllers\TipoVehiculoController::class,'destroy']);
-
+Route::post('/api/tipo/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculo']);
 
 //rutas del controlador de entradas en documentos de los vehiculos
 Route::post('/api/doc/update',[App\Http\Controllers\DocVehiculoController::class,'update']);

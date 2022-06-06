@@ -114,7 +114,7 @@ class TipoVehiculoController extends Controller
            ];
             
         }else{
-            $tipo = tipoVehiculos::where('id', $params_array['id'])//pide el id para llamar la categoria
+            $tipo = tipoVehiculos::where('codigo', $params_array['codigo'])//pide el id para llamar la categoria estaba con id le cambie a codigo 
             ->update(['tipoVehiculo'=>$params_array['tipoVehiculo']]);//actualiza solo le parametro de calseVEhiculo
                        
             $data = [
@@ -183,4 +183,38 @@ class TipoVehiculoController extends Controller
         //Devolver respuesta
         return response()->json($data);    
 }
+
+    public function getAllVehiculo($getToken = true){
+
+        
+        $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos
+        $signup = false;//signup variable que me ayuda a validar l epuedo poner culauqier nombre y por defecto viene false para convertirla en true 
+        if(is_object($tiposVehiculos)){
+           $signup = true;
+       }
+       if($signup){
+           $nuevoVehiculo = array();//preparo un array
+           foreach($tiposVehiculos as $recorrer){//for each m epermite realizar el recorrido
+            $tv = array( //traigo los datos que quiero 
+                'id-vehiculos' => $recorrer->id,
+                'claseVehiculo' => $recorrer->claseVehiculo
+
+            );
+            array_push($nuevoVehiculo, $tv); //aray de arrays
+            
+           }
+           $jwt = JWT::encode($nuevoVehiculo, $this->key, ['HS256']); 
+           $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+           if(is_null($getToken)){
+               $data = $decoded;
+           }
+        }else{
+            $data = array(
+                'status' => 'error',
+                'message' => 'Datos incorrectos'
+            );
+        }
+        return $data;
+    }
+
 }
