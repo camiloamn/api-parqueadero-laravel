@@ -1,11 +1,13 @@
 <?php
-namespace App\helpers;
+namespace App\helpers;//lo primero que se debe agregar manualmente
 
 use Firebase\JWT\JWT;
-use Illuminate\Support\Facades\DB;//me permite hacer consultas a la DB
+use Illuminate\Support\Facades\DB;//me permite hacer consultas a la Bd
 use App\Models\User;
+use App\Models\vehiculos;
+use App\Models\tipoVehiculos;
 
-class JwtAuth{
+class JwtAuth{ //lo agrego manualmente 
     
     public $key;
     
@@ -77,7 +79,8 @@ class JwtAuth{
         return $auth;
         }
         //LO COPIE DE tipoVehiculoCOntroller
-        public function getAllVehiculo($getToken = true){
+        public function getAllVehiculo(){
+            $getToken = true;
             $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos
             $signup = false;//signup variable que me ayuda a validar l epuedo poner culauqier nombre y por defecto viene false para convertirla en true 
             if(is_object($tiposVehiculos)){
@@ -97,6 +100,8 @@ class JwtAuth{
                 $jwt = JWT::encode($nuevoVehiculo, $this->key, ['HS256']); 
                 $decoded = JWT::decode($jwt, $this->key, ['HS256']);
                 if(is_null($getToken)){
+                    $data = $jwt;
+                }else{
                     $data = $decoded;
                 }
              }else{
@@ -106,9 +111,7 @@ class JwtAuth{
                  );
              }
              return $data;
-         }
-     
-
+         }     
    }
 
 

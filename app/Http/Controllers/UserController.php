@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\User;
 
+
+
 class UserController extends Controller {
 
     //METODO DE PRUEBAS PARA LOS CONTROLADORES

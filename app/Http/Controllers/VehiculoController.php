@@ -105,6 +105,7 @@ class VehiculoController extends Controller
              'status' => 'error',
              'message' =>  $validate->errors()
            ];
+        
             
         }else{
             $category = Vehiculos::where('id', $params_array['id'])//pide el id para llamar la categoria
@@ -115,7 +116,8 @@ class VehiculoController extends Controller
              'status' => 'success',
              'category' => $params_array  
            ];   
-        }        
+        } 
+               
     }else{
         $data = [
              'code' => 400,
