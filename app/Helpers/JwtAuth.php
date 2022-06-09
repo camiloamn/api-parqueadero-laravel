@@ -14,6 +14,7 @@ class JwtAuth{ //lo agrego manualmente
     public function __construct() {
         $this->key = 'esto_es_una_clave_super_secreta-99887766';
     }
+    //metodo de login
     public function signup($id, $password, $getToken = null) {
         
     //buscar si existe el usuario con las credenciales
@@ -35,19 +36,21 @@ class JwtAuth{ //lo agrego manualmente
           'apellidos'   => $user->apellidos,
           'email'       => $user->email,      
           'iat'         => time(),
-          'exp'         => time() + (7*24*60*60),//el token caduca en 7 dias           
+          'exp'         => time() + (7 * 24 * 60 * 60)//el token caduca en 7 dias           
       ); 
       //HS256 el algoritmo de decodificacion
-      $jwt = JWT::encode($token, $this->key, 'HS256');
-      $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+      $jwt = JWT::encode($token, $key, 'HS256');
+      $decoded = JWT::decode($jwt, $key, ['HS256']);
      //devolver los datos decodificados o el token en funcion de un parametro
-    if(is_null($getToken)){
+    
+     if(is_null($getToken)){//si getToken es null que m edevuleva el token
         $data = $jwt;
-    } else{
+
+    } else{//sino que me devuelva la decodificacion de ese token
         $data = $decoded;
     } 
     }else{
-        $data = array(
+        $data = array(//realizo el else en caso de que no se halla identificado correctamente
             'status' => 'Error',
             'message' => 'Login incorrecto.'
         );
@@ -78,7 +81,7 @@ class JwtAuth{ //lo agrego manualmente
     }
         return $auth;
         }
-        //LO COPIE DE tipoVehiculoCOntroller
+        //LO COPIE DE tipoVehiculoController
         public function getAllVehiculo(){
             $getToken = true;
             $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos

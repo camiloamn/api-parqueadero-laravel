@@ -175,7 +175,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-        App\Providers\JwtAuthServiceProvider::class, 
+        App\Providers\JwtAuthServiceProvider::class, /*lo agrego manualmente*/
 
     ],
 
@@ -231,7 +231,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'JwtAuth' => App\helpers\JwtAuth::class
+        'JwtAuth' => App\helpers\JwtAuth::class //añado manualmente
 
     ],
 

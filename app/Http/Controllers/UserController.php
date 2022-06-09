@@ -78,7 +78,7 @@ class UserController extends Controller {
     //METODO REGISTRO DE LOGIN
     public function login(Request $request) {
 
-        $jwtAuth = new \JwtAuth();
+        $jwtAuth = new \JwtAuth();//añado manualmente para instanciar
 
         //recibir datos por post
         $json = $request->input('json', null);
@@ -96,7 +96,7 @@ class UserController extends Controller {
             $signup = array(
                 'status' => 'error',
                 'code' => 404, //numeracion de codigo http 
-                'message' => 'El usuario no se ha podido identificar',
+                'message' => 'El usuario no se ha podido logear',
                 'errors' => $validate->errors()
             );
         } else {
@@ -122,8 +122,8 @@ class UserController extends Controller {
         $jwtAuth = new \JwtAuth();
         $checkToken = $jwtAuth->checkToken($token); //creamos la variable checkToken y le pasamos el token
         //recoger los datos por post
-        $json = $request->input('json', null); //recibo los datos json
-        $params_array = json_decode($json, true); //decodficicar el json a php
+        $json = $request->input('json', null); //recibo los datos que m ellegan desde la peticion json
+        $params_array = json_decode($json, true); //decodficicar el json a objeto php
         $params = json_decode($json);
 
         if ($checkToken && !empty($params_array)) {//si checkToken es true imprime 
