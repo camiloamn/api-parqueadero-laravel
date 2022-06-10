@@ -1,5 +1,6 @@
 <?php
 
+//cargando clases
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Middleware\ApiAuthMiddleware;//agrego esta linea para que funcione la ruta
@@ -12,13 +13,13 @@ Route::get('/pruebas', function(){
 });
 //rutas del controlador de usuario (UserController)
 Route::post('/api/register',[App\Http\Controllers\UserController::class,'register']);
-Route::post('/pruebas',[App\Http\Controllers\UserController::class,'pruebas']);
+//Route::post('/pruebas',[App\Http\Controllers\UserController::class,'pruebas']);
 Route::post('/api/delete',[App\Http\Controllers\AccionController::class,'delete']);
 Route::post('/api/user/login',[App\Http\Controllers\UserController::class,'login']);
 Route::put('/api/user/update',[App\Http\Controllers\UserController::class,'update']);
 Route::post('/api/user/upload',[App\Http\Controllers\UserController::class,'upload'])->middleware(ApiAuthMiddleware::class);
-Route::get('/api/user/avatar/{filename}',[App\Http\Controllers\UserController::class,'getImage']);
-Route::get('/api/user/detail/{id}',[App\Http\Controllers\UserController::class,'detail']);
+Route::get('/api/user/avatar/{filename}',[App\Http\Controllers\UserController::class,'getImage']);//se modifica y se agrega el {filename}
+Route::get('/api/user/detail/{id}',[App\Http\Controllers\UserController::class,'detail']);//se modifica y se agrega el {id}
 
 //rutas del controlador de clases de vehiculo (vehiculoController)
 Route::post('/api/update',[App\Http\Controllers\VehiculoController::class,'update']);
@@ -33,7 +34,7 @@ Route::post('/api/tipo/store',[App\Http\Controllers\TipoVehiculoController::clas
 Route::post('/api/tipo/show',[App\Http\Controllers\TipoVehiculoController::class,'show']);
 Route::post('/api/tipo/index',[App\Http\Controllers\TipoVehiculoController::class,'index']);
 Route::post('/api/tipo/destroy',[App\Http\Controllers\TipoVehiculoController::class,'destroy']);
-Route::post('/api/tipo/getAllVehiculos',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
+Route::post('/api/tipo/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculo']);
 
 //rutas del controlador de entradas en documentos de los vehiculos
 Route::post('/api/doc/update',[App\Http\Controllers\DocVehiculoController::class,'update']);

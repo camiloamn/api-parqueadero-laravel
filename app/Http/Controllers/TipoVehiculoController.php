@@ -4,51 +4,26 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;//agrego manualmente estos modelos
-use App\Models\vehiculos;//agrego manualmente estos modelos
+//use App\Models\vehiculos;//agrego manualmente estos modelos
 use App\Models\tipoVehiculos;//agrego manualmente estos modelos
 
 class TipoVehiculoController extends Controller
 {
-    public function pruebas(Request $request){
-        return "accion de pruebas tipovehiculo controller";
-    }
-    public function getAllVehiculos(Request $request){
-        $jwtAuth = new \JwtAuth();
 
-        $json = $request->input('json',null);
-        $params = json_decode($json);
-        $params_array = json_decode($json, true);
-
-        $validate = \Validator::make($params_array,[
-            
-        ]);
-        if($validate->fails()){
-            $signup = array(
-                'status'=> 'error',
-                'code'=>404,
-                'message'=>'No validos',
-                'errors'=>$validate->errors()
-            );
-        }else{
-            $signup = $jwtAuth->getAllVehiculo();
-
-            
-        }
-        return response()->json($signup,200);
-    }
 
     public function __construct() {
-    //utiliza el api.auth en todos los metodos excepto en los metodos index, show    
+    //utiliza el api.auth en todos los metodos excepto en los metodos index y show , en estos metodos no hay autenticacion  
         //$this->middleware('api.auth', ['except' => ['index','show']]);
     }
         //metodos para sacar informacion de los vehiculos
     public function index() {//metodo index para sacar las categorias de nuestra BD
-        $tiposVehiculos = tipoVehiculos::all(); //saca todas las categories de vehiculo o tipos 
+        $tipVehiculos = tipoVehiculos::all(); //saca todas las categories de vehiculo o tipos 
         //pruebas ;
         return response()->json([
-           'tipos' => $tiposVehiculos
+           'tipVehiculos' => $tipVehiculos
         ]);
     }
+    //deberia llamar id de vehiculo??????????'
     //metodo que me devuelve una sola categoria o tipo de vehiculo
     public function show($codigo) {
         $tVehiculos = tipoVehiculos::where("codigo", "=", $codigo)->first();//where me ayuda con datos diferntes a id como codigo
@@ -208,6 +183,34 @@ class TipoVehiculoController extends Controller
         //Devolver respuesta
         return response()->json($data);    
 }
+
+   /* public function pruebas(Request $request){
+        return "accion de pruebas tipovehiculo controller";
+    }
+    public function getAllVehiculos(Request $request){
+        $jwtAuth = new \JwtAuth();
+
+        $json = $request->input('json',null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+
+        $validate = \Validator::make($params_array,[
+            
+        ]);
+        if($validate->fails()){
+            $signup = array(
+                'status'=> 'error',
+                'code'=>404,
+                'message'=>'No validos',
+                'errors'=>$validate->errors()
+            );
+        }else{
+            $signup = $jwtAuth->getAllVehiculo();
+
+            
+        }
+        return response()->json($signup,200);
+    }*/
 
     
 

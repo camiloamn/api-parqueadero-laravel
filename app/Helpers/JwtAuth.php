@@ -39,8 +39,8 @@ class JwtAuth{ //lo agrego manualmente
           'exp'         => time() + (7 * 24 * 60 * 60)//el token caduca en 7 dias           
       ); 
       //HS256 el algoritmo de decodificacion
-      $jwt = JWT::encode($token, $key, 'HS256');
-      $decoded = JWT::decode($jwt, $key, ['HS256']);
+      $jwt = JWT::encode($token, $this->key, 'HS256');
+      $decoded = JWT::decode($jwt, $this->key, ['HS256']);
      //devolver los datos decodificados o el token en funcion de un parametro
     
      if(is_null($getToken)){//si getToken es null que m edevuleva el token

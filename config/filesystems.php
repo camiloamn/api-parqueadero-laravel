@@ -42,16 +42,16 @@ return [
             'visibility' => 'public',
         ],
         
-        'users' => [
+        'users' => [//se modifica
             'driver' => 'local',
-            'root' => storage_path('app/users'),
+            'root' => storage_path('app/users'),//se modifica
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],
         
-        'images' => [
+        'images' => [//se modifica
             'driver' => 'local',
-            'root' => storage_path('app/images'),
+            'root' => storage_path('app/images'),//se modifica
             'url' => env('APP_URL').'/storage',
             'visibility' => 'public',
         ],

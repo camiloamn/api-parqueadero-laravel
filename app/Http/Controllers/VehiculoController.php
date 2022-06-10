@@ -61,7 +61,7 @@ class VehiculoController extends Controller
            $data = [
              'code' => 400,
              'status' => 'error',
-             'message' => 'No se guardo la categoria'  
+             'message' => 'No se guardo el vehiculo'  
            ];
        }else{
        $category = new vehiculos();       
@@ -80,7 +80,7 @@ class VehiculoController extends Controller
            $data = [
              'code' => 400,
              'status' => 'error',
-             'message' => 'No se ha enviado ninguna categoria'  
+             'message' => 'No se ha enviado ninguna clase de vehiculo'  
            ];
        }
        //devolver resultado

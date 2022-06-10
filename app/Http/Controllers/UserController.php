@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
+use Illuminate\Http\Response;//lo importo de manera
 use App\Models\User;
 
 
@@ -117,10 +117,12 @@ class UserController extends Controller {
     
     //metodo para actualizar los datos del usuario
     public function update(Request $request) {
+        
         //comprobar si el usuario esta identificado
         $token = $request->header('Authorization'); //recoger el token desde una cebecera  
         $jwtAuth = new \JwtAuth();
         $checkToken = $jwtAuth->checkToken($token); //creamos la variable checkToken y le pasamos el token
+        
         //recoger los datos por post
         $json = $request->input('json', null); //recibo los datos que m ellegan desde la peticion json
         $params_array = json_decode($json, true); //decodficicar el json a objeto php
@@ -149,6 +151,8 @@ class UserController extends Controller {
              
             $user = User::where('id','=',$params->id)//busca el usuario 
                         ->first();
+            //$user_update = User::where('id', $user->sub)->update($params_array);
+
             if(is_object($user)){
                 $user->id=$params->id;
                 $user->nombre=$params->nombre;
@@ -161,18 +165,19 @@ class UserController extends Controller {
                     'code' => 200,
                     'status' => 'succes',
                     'user' => $user,
-                    'changes' => $params_array
+                    'changes' => $params_array //me permite ver los datos antiguos , para ver los cambios
                 );
             }else{
                 $data = array(
                     'code' => 400,
-                    'status' => 'error'
-                );
-            }          
-        
-           
+                    'status' => 'error',
+                    'message' => 'El usuario no esta identificado.'
 
-        } else {
+                );
+            }   
+        
+
+        }else {
             $data = array(
                 'code' => 400,
                 'status' => 'error',
@@ -183,7 +188,9 @@ class UserController extends Controller {
         return response()->json($data, $data['code']);
     }
 
-    public function upload(Request $request) {//metodo para subir un avatar
+
+    //metodo para subir un avatar
+    public function upload(Request $request) {
         //recoger datos de la peticion
         $image = $request->file('file0'); //recoger los datos que llegan
         //validacion de imagen 
@@ -199,7 +206,7 @@ class UserController extends Controller {
                 'message' => 'Error al subir imagen.'
             );
         } else {
-            $image_name = time() . $image->getClientOriginalName();
+            $image_name = time() . $image->getClientoriginalName();
             \Storage::disk('users')->put($image_name, \File::get($image));
 
             $data = array(
