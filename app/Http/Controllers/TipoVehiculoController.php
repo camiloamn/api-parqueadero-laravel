@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;//agrego manualmente estos modelos
+use Illuminate\Http\Response;//libreria de respuesta agrego manualmente
 //use App\Models\vehiculos;//agrego manualmente estos modelos
 use App\Models\tipoVehiculos;//agrego manualmente estos modelos
 
@@ -15,12 +15,12 @@ class TipoVehiculoController extends Controller
     //utiliza el api.auth en todos los metodos excepto en los metodos index y show , en estos metodos no hay autenticacion  
         //$this->middleware('api.auth', ['except' => ['index','show']]);
     }
-        //metodos para sacar informacion de los vehiculos
+        //metodos para sacar informacion de todos los vehiculos
     public function index() {//metodo index para sacar las categorias de nuestra BD
         $tipVehiculos = tipoVehiculos::all(); //saca todas las categories de vehiculo o tipos 
         //pruebas ;
         return response()->json([
-           'tipVehiculos' => $tipVehiculos
+           'tiposVehiculos' => $tipVehiculos
         ]);
     }
     //deberia llamar id de vehiculo??????????'
@@ -47,8 +47,8 @@ class TipoVehiculoController extends Controller
     //guardar un tipo de vehiculo utilizando la api
     public function store(Request $request){
        //recoger los datos por post
-       $json = $request->input('json', null);
-       $params_array = json_decode($json, true);//me devuelve un dato json y lo convierte en array
+       $json = $request->input('json', null);//cero la cariable json
+       $params_array = json_decode($json, true);//lo convierto en un array de php con el parametro true
        
        if(!empty($params_array)){
        //validar los datos
@@ -66,11 +66,10 @@ class TipoVehiculoController extends Controller
              'message' => 'No se guardo la categoria'  
            ];
        }else{
-       $tVehiculos = new tipoVehiculos();
-       //$tipo->codigo = $params_array['codigo'];
+       $tVehiculos = new tipoVehiculos();       
        $tVehiculos->nombre = $params_array['nombre'];
        $tVehiculos->placa = $params_array['placa'];
-       //$tipo->claseVehiculo = $params_array['claseVehiculo'];     
+       //$tVehiculos->claseVehiculo = $params_array['claseVehiculo'];     
        $tVehiculos->id_vehiculos = $params_array['id_vehiculos'];//llave foranea que la traigo con un params_ array
        $tVehiculos->save();
        
@@ -184,10 +183,11 @@ class TipoVehiculoController extends Controller
         return response()->json($data);    
 }
 
-   /* public function pruebas(Request $request){
+   public function pruebas(Request $request){
         return "accion de pruebas tipovehiculo controller";
     }
     public function getAllVehiculos(Request $request){
+        //$checkToken = $jwtAuth->checkToken($token);
         $jwtAuth = new \JwtAuth();
 
         $json = $request->input('json',null);
@@ -210,7 +210,7 @@ class TipoVehiculoController extends Controller
             
         }
         return response()->json($signup,200);
-    }*/
+    }
 
     
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;//agrego manualmente estos modelos
-use App\Models\vehiculos;//agrego manualmente estos modelos
+use Illuminate\Http\Response;//librearia de respuesta agrego manualmente estos modelos
+use App\Models\vehiculos;//agrego manualmente el modelo
 
 class VehiculoController extends Controller
 {

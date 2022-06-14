@@ -86,7 +86,7 @@ class JwtAuth{ //lo agrego manualmente
             $getToken = true;
             $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos
             $signup = false;//signup variable que me ayuda a validar l epuedo poner culauqier nombre y por defecto viene false para convertirla en true 
-            if(is_object($tiposVehiculos)){
+            if(sizeof($tiposVehiculos)>0){
                 $signup = true;
             }
             if($signup){
@@ -98,9 +98,8 @@ class JwtAuth{ //lo agrego manualmente
      
                  );
                  array_push($nuevoVehiculo, $tv); //aray de arrays
-                 
                 }
-                $jwt = JWT::encode($nuevoVehiculo, $this->key, ['HS256']); 
+                $jwt = JWT::encode($nuevoVehiculo, $this->key, 'HS256'); 
                 $decoded = JWT::decode($jwt, $this->key, ['HS256']);
                 if(is_null($getToken)){
                     $data = $jwt;
