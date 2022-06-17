@@ -27,14 +27,14 @@ Route::post('/api/store',[App\Http\Controllers\VehiculoController::class,'store'
 Route::post('/api/show',[App\Http\Controllers\VehiculoController::class,'show']);
 Route::post('/api/index',[App\Http\Controllers\VehiculoController::class,'index']);
 Route::post('/api/destroy',[App\Http\Controllers\VehiculoController::class,'destroy']);
-
+Route::post('/api/getAllVehiculo',[App\Http\Controllers\VehiculoController::class,'getAllVehiculos']);
 //rutas del controlador de tipos de vehiculo (TipoVehiculoCOntroller)
 Route::post('/api/tipo/update',[App\Http\Controllers\TipoVehiculoController::class,'update']);
 Route::post('/api/tipo/store',[App\Http\Controllers\TipoVehiculoController::class,'store']);
 Route::post('/api/tipo/show',[App\Http\Controllers\TipoVehiculoController::class,'show']);
 Route::post('/api/tipo/index',[App\Http\Controllers\TipoVehiculoController::class,'index']);
 Route::post('/api/tipo/destroy',[App\Http\Controllers\TipoVehiculoController::class,'destroy']);
-Route::post('/api/tipo/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
+Route::post('/api/tipo/getAllTipoVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllTipoVehiculos']);
 
 //rutas del controlador de entradas en documentos de los vehiculos
 Route::post('/api/doc/update',[App\Http\Controllers\DocVehiculoController::class,'update']);

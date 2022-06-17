@@ -178,4 +178,40 @@ class VehiculoController extends Controller
         //Devolver respuesta
         return response()->json($data);  
     }
+
+    ////listaaaaaa
+
+    public function getAllVehiculo(){
+        $getToken = true;
+        $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos
+        $signup = false;//signup variable que me ayuda a validar l epuedo poner culauqier nombre y por defecto viene false para convertirla en true 
+        if(sizeof($tiposVehiculos)>0){
+            $signup = true;
+        }
+        if($signup){
+            $nuevoVehiculo = array();//preparo un array
+            foreach($tiposVehiculos as $recorrer){//for each m epermite realizar el recorrido
+             $tv = array( //traigo los datos que quiero 
+                 'id-vehiculos' => $recorrer->id,
+                 //'nombre' => $nombre->nombre,    
+                 'claseVehiculo' => $recorrer->claseVehiculo
+ 
+             );
+             array_push($nuevoVehiculo, $tv); //aray de arrays
+            }
+            $jwt = JWT::encode($nuevoVehiculo, $this->key, 'HS256'); 
+            $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+            if(is_null($getToken)){
+                $data = $jwt;
+            }else{
+                $data = $decoded;
+            }
+         }else{
+             $data = array(
+                 'status' => 'error',
+                 'message' => 'Datos incorrectos'
+             );
+         }
+         return $data;
+     }     
 }

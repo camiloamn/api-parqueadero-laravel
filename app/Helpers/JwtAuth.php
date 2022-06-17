@@ -94,6 +94,7 @@ class JwtAuth{ //lo agrego manualmente
                 foreach($tiposVehiculos as $recorrer){//for each m epermite realizar el recorrido
                  $tv = array( //traigo los datos que quiero 
                      'id-vehiculos' => $recorrer->id,
+                     //'nombre' => $nombre->nombre,    
                      'claseVehiculo' => $recorrer->claseVehiculo
      
                  );
