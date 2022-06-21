@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;//librearia de respuesta agrego manualmente estos modelos
 use App\Models\vehiculos;//agrego manualmente el modelo
-
+use Firebase\JWT\JWT;
 class VehiculoController extends Controller
 {
     public function pruebas(Request $request){
@@ -16,7 +16,7 @@ class VehiculoController extends Controller
         //$this->middleware('api.auth', ['except' => ['index','show']]);
     }
         //metodos para sacar informacion de los vehiculos
-    public function index() {//metodo index para sacar las categorias de nuestra BD
+    /*public function index() {//metodo index para sacar las categorias de nuestra BD
         $getToken = true;
         $categoriesVehiculos = vehiculos::all(); //saca todas las categories de vehiculo o tipos 
         //pruebas ;
@@ -50,7 +50,7 @@ class VehiculoController extends Controller
         }
         return $data;
 
-    }
+    }*/
     //metodo que me devuelve una sola categoria o tipo de vehiculo
     public function show($id) {
         $category = vehiculos::where("id", "=", $id)->first();//where me ayuda con datos diferntes a id como codigo
