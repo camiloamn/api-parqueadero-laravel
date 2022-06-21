@@ -13,15 +13,43 @@ class VehiculoController extends Controller
     }
     public function __construct() {
     //utiliza el api.auth en todos los metodos excepto en los metodos index, show    
-        $this->middleware('api.auth', ['except' => ['index','show']]);
+        //$this->middleware('api.auth', ['except' => ['index','show']]);
     }
         //metodos para sacar informacion de los vehiculos
     public function index() {//metodo index para sacar las categorias de nuestra BD
+        $getToken = true;
         $categoriesVehiculos = vehiculos::all(); //saca todas las categories de vehiculo o tipos 
         //pruebas ;
-        return response()->json([
-           'categories' => $categoriesVehiculos
-        ]);
+        $signup = false;
+        if(sizeof($categoriesVehiculos)>0){
+            $signup = true;
+
+        }
+        if($signup){
+            $nuevoVehiculo = array();
+            foreach($categoriesVehiculos as $cv){
+                $token = array(
+                'claseVehiculo' => $cv->claseVehiculo,
+                'id'=> $cv->id
+                );
+            array_push($nuevoVehiculo, $token);
+            }
+            $jwt = JWT::encode($nuevoVehiculo, $this->key, 'HS256'); 
+            $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+            if(is_null($getToken)){
+                $data = $jwt;
+            }else{
+                $data = $decoded;
+            }
+
+        }else{
+            $data = array(
+                'status' => 'error',
+                'message' => 'Datos incorrectos'
+            );
+        }
+        return $data;
+
     }
     //metodo que me devuelve una sola categoria o tipo de vehiculo
     public function show($id) {
