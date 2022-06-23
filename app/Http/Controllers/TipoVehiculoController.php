@@ -63,7 +63,7 @@ class TipoVehiculoController extends Controller
            $data = [
              'code' => 400,
              'status' => 'error',
-             'message' => 'No se guardo la categoria'  
+             'message' => 'NO SE GUARDO EL TIPO DE VEHICULOS'  
            ];
        }else{
        $tVehiculos = new tipoVehiculos();       

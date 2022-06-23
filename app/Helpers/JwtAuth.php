@@ -81,7 +81,7 @@ class JwtAuth{ //lo agrego manualmente
     }
         return $auth;
         }
-        //LO COPIE DE tipoVehiculoController
+        
         public function getAllVehiculo(){
             $getToken = true;
             $tiposVehiculos = vehiculos::all(); //select * from traigo todo lo de vehiculos
@@ -93,7 +93,7 @@ class JwtAuth{ //lo agrego manualmente
                 $nuevoVehiculo = array();//preparo un array
                 foreach($tiposVehiculos as $recorrer){//for each m epermite realizar el recorrido
                  $tv = array( //traigo los datos que quiero 
-                     'id-vehiculos' => $recorrer->id,
+                     'id_vehiculos' => $recorrer->id,
                      //'nombre' => $nombre->nombre,    
                      'claseVehiculo' => $recorrer->claseVehiculo
      

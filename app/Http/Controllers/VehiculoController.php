@@ -220,7 +220,7 @@ class VehiculoController extends Controller
             $nuevoVehiculo = array();//preparo un array
             foreach($tiposVehiculos as $recorrer){//for each m epermite realizar el recorrido
              $tv = array( //traigo los datos que quiero 
-                 'id-vehiculos' => $recorrer->id,
+                 'id_vehiculos' => $recorrer->id,
                  //'nombre' => $nombre->nombre,    
                  'claseVehiculo' => $recorrer->claseVehiculo
  
