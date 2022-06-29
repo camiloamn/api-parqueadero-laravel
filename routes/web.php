@@ -42,5 +42,13 @@ Route::post('/api/doc/store',[App\Http\Controllers\DocVehiculoController::class,
 Route::post('/api/doc/show',[App\Http\Controllers\DocVehiculoController::class,'show']);
 Route::post('/api/doc/index',[App\Http\Controllers\DocVehiculoController::class,'index']);
 Route::post('/api/doc/destroy',[App\Http\Controllers\DocVehiculoController::class,'destroy']);
+Route::post('/api/doc/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
 
-
+//rutas del tDocumentos o tipo de documentos
+Route::post('/api/tdoc/update',[App\Http\Controllers\tdocumentosController::class,'update']);
+Route::post('/api/tdoc/store',[App\Http\Controllers\tdocumentosController::class,'store']);
+Route::post('/api/tdoc/show',[App\Http\Controllers\tdocumentosController::class,'show']);
+Route::post('/api/tdoc/index',[App\Http\Controllers\tdocumentosController::class,'index']);
+Route::post('/api/tdoc/destroy',[App\Http\Controllers\tdocumentosController::class,'destroy']);
+Route::post('/api/tdoc/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
+ 

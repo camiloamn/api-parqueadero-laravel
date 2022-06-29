@@ -1,9 +1,11 @@
+/*crea la base de datos comfamiliar si no existe */
+/*esos pk, pf tienes que llamarlos igual*/
 create dataBase if not exists comfamiliar;
 use comfamiliar;
 
 create table usuarios(
 id varchar(100) not null,
-nombre varchar(50) not null,
+nombre varchar(50) not null,/*not null: que no puede ser nulo*/
 apellidos varchar(50) not null,
 email varchar(80) null,
 password varchar(250),
@@ -20,7 +22,8 @@ claseVehiculo varchar(30) not null,
 created_at datetime default null,
 updated_at datetime default null,
 id_usuarios varchar(20) not null,
-constraint pk_vehiculos primary key(id),
+constraint pk_vehiculos primary key(id),/*restricciones a la allave primaria , mejor dicho dice que es la lllave primaria de esa tabla*/
+/*dice que va a llamar el id de usuario en la tabla vehiculos*/
 constraint fk_vehiculo_usuario foreign key(id_usuarios) references usuarios(id)/*RELACION TABLAS*/ 
 )ENGINE=InnoDb;
 
@@ -33,7 +36,7 @@ constraint fk_vehiculo_usuario foreign key(id_usuarios) references usuarios(id)/
     id_vehiculos int not null,
     constraint pk_tipoVehiculos primary key(codigo),     
     constraint fk_tipoVehiculo_vehiculos foreign key(id_vehiculos) references vehiculos(id)/*RELACION TABLAS*/ 
-    )ENGINE=InnoDb;
+    )ENGINE=InnoDb;/*siempre va al final de las tablas*/
 
 create table docVehiculos(
 id int auto_increment not null,
@@ -57,7 +60,31 @@ created_at datetime default null,
 updated_at datetime default null,
 id_vehiculos int not null,
 codigoTipoVehiculo int not null,
-constraint pk_docVehiculos primary key(id),
+constraint pk_docVehiculos primary key(id),/*llave primaria*/
+/*va allamar de tipo vehiculo el codigo */
 constraint fk_docVehiculo_tipoVehiculos foreign key(codigoTipoVehiculo) references tipoVehiculos(codigo),
 constraint fk_docVehiculo_vehiculos foreign key(id_Vehiculos) references Vehiculos(id)
+)ENGINE=InnoDb;
+
+create table tDocumentos(
+id int auto_increment not null,
+tipoDocumento varchar(100),
+id_usuarios varchar(20) not null,
+constraint pk_tDocumentos primary key(id),
+constraint fk_tDocumento_usuario foreign key(id_usuarios) references usuarios(id)
+)ENGINE=InnoDb;
+
+create table listarDocumentos(
+id int auto_increment not null,
+id_vehiculos int not null,
+codigoTipoVehiculo int not null,
+id_tDocumentos int not null,
+ruta string not null,
+created_at datetime default null,
+updated_at datetime default null,
+constraint pk_listarDocumentos primary key(id),
+constraint fk_listarDocumento_tipoVehiculos foreign key(codigoTipoVehiculo) references tipoVehiculos(codigo),
+constraint fk_listarDocumento_vehiculos foreign key(id_Vehiculos) references Vehiculos(id)
+
+
 )ENGINE=InnoDb;
