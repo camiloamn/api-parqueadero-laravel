@@ -74,17 +74,15 @@ constraint pk_tDocumentos primary key(id),
 constraint fk_tDocumento_usuario foreign key(id_usuarios) references usuarios(id)
 )ENGINE=InnoDb;
 
-create table listarDocumentos(
+create table listas(
 id int auto_increment not null,
 id_vehiculos int not null,
 codigoTipoVehiculo int not null,
 id_tDocumentos int not null,
-ruta string not null,
-created_at datetime default null,
-updated_at datetime default null,
+ruta varchar (100) not null,
+fechainicio date not null,
+fechafin date not null,
 constraint pk_listarDocumentos primary key(id),
 constraint fk_listarDocumento_tipoVehiculos foreign key(codigoTipoVehiculo) references tipoVehiculos(codigo),
 constraint fk_listarDocumento_vehiculos foreign key(id_Vehiculos) references Vehiculos(id)
-
-
 )ENGINE=InnoDb;
