@@ -8,4 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class tDocumentos extends Model
 {
     protected $table = 'tDocumentos';
+    public $timestamps = false; //bloqueo por defecto el update at porque laravel los necesita siempre
 }

@@ -8,6 +8,16 @@ use App\Models\tDocumentos;
 
 class tdocumentosController extends Controller
 {
+    //metodos para sacar informacion de todos los vehiculos
+    public function index() {//metodo index para sacar las categorias de nuestra BD
+    $tdocumentos = tDocumentos::all(); //saca todas las categories de vehiculo o tipos 
+    //pruebas ;
+    return response()->json([
+    'tdocumentos' => $tdocumentos
+    
+        ]);
+    } 
+
     //metodo que me devuelve una sola categoria o tipo de vehiculo
     public function show($id) {
         $tdocumentos = tDocumentos::where("id", "=", $id)->first();//where me ayuda con datos diferntes a id como codigo
@@ -38,24 +48,24 @@ class tdocumentosController extends Controller
        //validar los datos
        $validate = \Validator::make($params_array, [  
            //'codigo' => 'required', 
-           'nombre' => 'required',
-           'placa' => 'required',                      
-           'id_vehiculos' => 'required', //verificar que necesito realmente
+           'tipoDocumento' => 'required',
+           //'placa' => 'required',                      
+           //'id_vehiculos' => 'required', //verificar que necesito realmente
        ]);
        //guardar la categoria
        if($validate->fails()){//si la validacion es fallida
            $data = [
              'code' => 400,
              'status' => 'error',
-             'message' => 'NO SE GUARDO EL DOCUMENTOOOOOOOO TDOCUMENTROS CONTROLLER'  
+             'message' => 'NO SE GUARDO EL DOCUMENTOOOOOOOO TDOCUMENTOS CONTROLLER'  
            ];
        }else{
        $tdocumentos = new tDocumentos();       
-       $tdocumentos->nombre = $params_array['nombre'];
+       $tdocumentos->tipoDocumento = $params_array['tipoDocumento'];
        //$tVehiculos->placa = $params_array['placa'];
        //$tVehiculos->claseVehiculo = $params_array['claseVehiculo'];     
-       $tVehiculos->id_usuarios = $params_array['id_usuarios'];//llave foranea que la traigo con un params_ array
-       $tVehiculos->save();
+       $tdocumentos->id_usuarios = $params_array['id_usuarios'];//llave foranea que la traigo con un params_ array
+       $tdocumentos->save();
        
        $data = [
              'code' => 200,
