@@ -37,12 +37,14 @@ Route::post('/api/tipo/destroy',[App\Http\Controllers\TipoVehiculoController::cl
 Route::post('/api/tipo/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
 
 //rutas del controlador de entradas en documentos de los vehiculos
-Route::post('/api/doc/update',[App\Http\Controllers\DocVehiculoController::class,'update']);
+/* Route::post('/api/doc/update',[App\Http\Controllers\DocVehiculoController::class,'update']);
 Route::post('/api/doc/store',[App\Http\Controllers\DocVehiculoController::class,'store']);
 Route::post('/api/doc/show',[App\Http\Controllers\DocVehiculoController::class,'show']);
 Route::post('/api/doc/index',[App\Http\Controllers\DocVehiculoController::class,'index']);
 Route::post('/api/doc/destroy',[App\Http\Controllers\DocVehiculoController::class,'destroy']);
 Route::post('/api/doc/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
+ */
+
 
 //rutas del tDocumentos o tipo de documentos
 Route::post('/api/tdoc/update',[App\Http\Controllers\tdocumentosController::class,'update']);
@@ -51,4 +53,13 @@ Route::post('/api/tdoc/show',[App\Http\Controllers\tdocumentosController::class,
 Route::post('/api/tdoc/index',[App\Http\Controllers\tdocumentosController::class,'index']);
 Route::post('/api/tdoc/destroy',[App\Http\Controllers\tdocumentosController::class,'destroy']);
 Route::post('/api/tdoc/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
- 
+
+
+//rutas de las listas 
+Route::post('/api/listas/update', [App\Http\Controllers\listasController::class,'update']);
+Route::post('/api/listas/store',[App\Http\Controllers\listasController::class,'store']);
+Route::post('/api/listas/show',[App\Http\Controllers\listasController::class,'show']);
+Route::post('/api/listas/index',[App\Http\Controllers\listasController::class,'index']);
+Route::post('/api/listas/destroy',[App\Http\Controllers\listasController::class,'destroy']);
+Route::post('/api/listas/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
+Route::get('/api/listas/buscador',[App\Http\Controllers\listasController::class,'buscador']);
