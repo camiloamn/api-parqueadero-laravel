@@ -63,3 +63,4 @@ Route::post('/api/listas/index',[App\Http\Controllers\listasController::class,'i
 Route::post('/api/listas/destroy',[App\Http\Controllers\listasController::class,'destroy']);
 Route::post('/api/listas/getAllVehiculo',[App\Http\Controllers\TipoVehiculoController::class,'getAllVehiculos']);
 Route::get('/api/listas/buscador',[App\Http\Controllers\listasController::class,'buscador']);
+Route::post('/api/listas/getAllDocumentos',[App\Http\Controllers\listasController::class,'getAllDocumentos']);

@@ -183,7 +183,7 @@ class listasController extends Controller
        public function pruebas(Request $request){
             return "accion de pruebas tipovehiculo controller";
         }
-        public function getAllVehiculos(Request $request){
+        public function getAllDocumentos(Request $request){
             //$checkToken = $jwtAuth->checkToken($token);
             $jwtAuth = new \JwtAuth();
     
@@ -202,7 +202,7 @@ class listasController extends Controller
                     'errors'=>$validate->errors()
                 );
             }else{
-                $signup = $jwtAuth->getAllVehiculo();
+                $signup = $jwtAuth->getAllDocumentos();
     
                 
             }
