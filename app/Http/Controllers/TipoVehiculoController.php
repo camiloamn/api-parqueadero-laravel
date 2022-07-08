@@ -10,10 +10,11 @@ use App\Models\tipoVehiculos;//agrego manualmente estos modelos
 class TipoVehiculoController extends Controller
 {
 
-
+    
     public function __construct() {
     //utiliza el api.auth en todos los metodos excepto en los metodos index y show , en estos metodos no hay autenticacion  
-        //$this->middleware('api.auth', ['except' => ['index','show']]);
+   
+    //$this->middleware('api.auth', ['except' => ['index','show']]);
     }
         //metodos para sacar informacion de todos los vehiculos
     public function index() {//metodo index para sacar las categorias de nuestra BD

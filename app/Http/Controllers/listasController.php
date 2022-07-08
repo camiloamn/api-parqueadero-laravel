@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Models\lista;
 use App\Models\tipoVehiculos;
+use APP\Models\tDocumentos;
 
 
 class listasController extends Controller

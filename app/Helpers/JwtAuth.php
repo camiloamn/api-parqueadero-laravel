@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;//me permite hacer consultas a la Bd
 use App\Models\User;
 use App\Models\vehiculos;
 use App\Models\tipoVehiculos;
+use App\Models\tDocumentos;
+use App\Models\lista;
 
 class JwtAuth{ //lo agrego manualmente 
     
@@ -114,7 +116,40 @@ class JwtAuth{ //lo agrego manualmente
                  );
              }
              return $data;
-         }     
+         }
+         
+         public function getAllDocumentos(){
+            $getToken = true;
+            $tdocumentos = tDocumentos::all(); //select * from traigo todo lo de vehiculos
+            $signup = false;//signup variable que me ayuda a validar l epuedo poner culauqier nombre y por defecto viene false para convertirla en true 
+            if(sizeof($tdocumentos)>0){
+                $signup = true;
+            }
+            if($signup){
+                $nuevoDocumento = array();//preparo un array
+                foreach($tdocumentos as $recorrer){//for each m epermite realizar el recorrido
+                 $td = array( //traigo los datos que quiero 
+                    'id_Documentos' => $recorrer->id, 
+                    'tipoDocumento' => $recorrer->tipoDocumento
+                         
+                 );
+                 array_push($nuevoDocumento, $td); //aray de arrays
+                }
+                $jwt = JWT::encode($nuevoDocumento, $this->key, 'HS256'); 
+                $decoded = JWT::decode($jwt, $this->key, ['HS256']);
+                if(is_null($getToken)){
+                    $data = $jwt;
+                }else{
+                    $data = $decoded;
+                }
+             }else{
+                 $data = array(
+                     'status' => 'error',
+                     'message' => 'Datos incorrectos'
+                 );
+             }
+             return $data;
+         }
    }
 
 
