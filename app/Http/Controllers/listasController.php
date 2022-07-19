@@ -17,7 +17,7 @@ class listasController extends Controller
         $lista = lista::all(); //saca todas las categories de vehiculo o tipos 
         //pruebas ;
         return response()->json([
-        'tdocumentos' => $lista
+        'listas$listas' => $lista
         
             ]);
         } 
@@ -52,7 +52,14 @@ class listasController extends Controller
            //validar los datos
            $validate = \Validator::make($params_array, [  
                //'codigo' => 'required', 
-               'tipoDocumento' => 'required',
+               //'tipoDocumento' => 'required',
+               'id_vehiculos' => 'required',
+               'codigoTipoVehiculo' => 'required',
+               'id_tDocumentos' => 'required',
+               'fechainicio' => 'required',
+               'fechafin' => 'required',
+               'url' => 'required',
+               
                //'placa' => 'required',                      
                //'id_vehiculos' => 'required', //verificar que necesito realmente
            ]);
@@ -61,20 +68,25 @@ class listasController extends Controller
                $data = [
                  'code' => 400,
                  'status' => 'error',
-                 'message' => 'NO SE GUARDO EL DOCUMENTOOOOOOOO TDOCUMENTOS CONTROLLER'  
+                 'message' => 'NO SE GUARDO LA LISTA'  
                ];
            }else{
-           $tdocumentos = new tDocumentos();       
-           $tdocumentos->tipoDocumento = $params_array['tipoDocumento'];
+           $lista = new listas();
+           $lista->id_vehiculos = $params_array['id_vehiculos'];
+           $lista->codigoTipoVehiculo = $params_array['codigoTipoVehiculo'];
+           $lista->id_tDocumentos = $params_array['id_tDocumentos'];      
+           $lista->fechainicio = $params_array['fechainicio'];
+           $lista->fechafin = $params_array['fechafin'];
+           $lista->url = $params_array['url'];
            //$tVehiculos->placa = $params_array['placa'];
            //$tVehiculos->claseVehiculo = $params_array['claseVehiculo'];     
-           $tdocumentos->id_usuarios = $params_array['id_usuarios'];//llave foranea que la traigo con un params_ array
-           $tdocumentos->save();
+           //$lista->id_usuarios = $params_array['id_usuarios'];//llave foranea que la traigo con un params_ array
+           $lista->save();
            
            $data = [
                  'code' => 200,
                  'status' => 'success',
-                 'tipo' => $tdocumentos  
+                 'tipo' => $lista  
                ];
              }
              
@@ -82,7 +94,7 @@ class listasController extends Controller
                $data = [
                  'code' => 400,
                  'status' => 'error',
-                 'message' => 'No se ha enviado ningun tipo de vehiculo'  
+                 'message' => 'No se ha enviado ninguna lista'  
                ];
            }
            //devolver resultado
@@ -111,7 +123,7 @@ class listasController extends Controller
                ];
                 
             }else{
-                $tdocumentos = tDocumentos::where('id', $params_array['id'])//pide el id para llamar la categoria estaba con id le cambie a codigo 
+                $lista = tDocumentos::where('id', $params_array['id'])//pide el id para llamar la categoria estaba con id le cambie a codigo 
                 ->update(['tipoVehiculo'=>$params_array['tipoVehiculo']]);//actualiza solo le parametro de calseVEhiculo
                            
                 $data = [
