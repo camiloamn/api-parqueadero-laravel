@@ -71,7 +71,7 @@ class listasController extends Controller
                  'message' => 'NO SE GUARDO LA LISTA'  
                ];
            }else{
-           $lista = new listas();
+           $lista = new lista();
            $lista->id_vehiculos = $params_array['id_vehiculos'];
            $lista->codigoTipoVehiculo = $params_array['codigoTipoVehiculo'];
            $lista->id_tDocumentos = $params_array['id_tDocumentos'];      

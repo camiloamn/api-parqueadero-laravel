@@ -8,6 +8,6 @@ use Illuminate\Database\Eloquent\Model;
 class lista extends Model
 {
     use HasFactory;
-    protected $table = 'lista';
+    protected $table = 'listas';
     public $timestamps = false;
 }
