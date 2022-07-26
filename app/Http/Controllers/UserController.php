@@ -195,8 +195,8 @@ class UserController extends Controller {
         $image = $request->file('file0'); //recoger los datos que llegan
         //validacion de imagen 
         $validate = \Validator::make($request->all(), [
-                    'file0' => 'required|mimes:docx,pdf,xml,xlsx,xls'//formatos que va a permitir
-        ]);
+                    'file0' => 'required:txt,docx,pdf,xml,xlsx,xls'//formatos que va a permitir
+        ]);                                     
         //guardar imgen
         if (!$image || $validate->fails()) {
             //devolver el resultado        

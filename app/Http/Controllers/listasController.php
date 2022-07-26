@@ -53,7 +53,7 @@ class listasController extends Controller
            $validate = \Validator::make($params_array, [  
                //'codigo' => 'required', 
                //'tipoDocumento' => 'required',
-               'id_vehiculos' => 'required',
+               //'id_vehiculos' => 'required',
                'codigoTipoVehiculo' => 'required',
                'id_tDocumentos' => 'required',
                'fechainicio' => 'required',
@@ -72,7 +72,7 @@ class listasController extends Controller
                ];
            }else{
            $lista = new lista();
-           $lista->id_vehiculos = $params_array['id_vehiculos'];
+           //$lista->id_vehiculos = $params_array['id_vehiculos'];
            $lista->codigoTipoVehiculo = $params_array['codigoTipoVehiculo'];
            $lista->id_tDocumentos = $params_array['id_tDocumentos'];      
            $lista->fechainicio = $params_array['fechainicio'];
@@ -112,7 +112,7 @@ class listasController extends Controller
                'codigo' => 'required',
                //'nombre' => 'required',
                'placa' => 'required',                       
-               'id_vehiculos' => 'required', //verificar que necesito realmente 
+               //'id_vehiculos' => 'required', //verificar que necesito realmente 
             ]);
             
             if($validate->fails()){
