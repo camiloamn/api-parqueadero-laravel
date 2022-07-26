@@ -67,7 +67,42 @@ class TipoVehiculoController extends Controller
              'message' => 'NO SE GUARDO EL TIPO DE VEHICULOS'  
            ];
        }else{
-       $tVehiculos = new tipoVehiculos();       
+
+       $tpVehiculos = tipoVehiculos::where('placa', $params_array ['placa'])->get();
+       
+       if(sizeof($tpVehiculos)>0){
+
+        
+
+        echo('<script>
+         
+        console.log(Placa duplicada);
+        
+        </script>');
+       
+       } else{
+
+        $tVehiculos = new tipoVehiculos();       
+        $tVehiculos->nombre = $params_array['nombre'];
+        $tVehiculos->placa = $params_array['placa'];
+        //$tVehiculos->claseVehiculo = $params_array['claseVehiculo'];     
+        $tVehiculos->id_vehiculos = $params_array['id_vehiculos'];//llave foranea que la traigo con un params_ array
+        $tVehiculos->save();
+        
+        $data = [
+              'code' => 200,
+              'status' => 'success',
+              'tipo' => $tVehiculos,   
+              'tvehiculos' => $tpVehiculos
+            ];
+
+       }
+
+      /*  $colores = array("azul","rojo","amarillo");
+        $numero_colores = sizeof($colores);
+        echo "Número de colores en el array: " . $numero_colores;
+ */
+       /* $tVehiculos = new tipoVehiculos();       
        $tVehiculos->nombre = $params_array['nombre'];
        $tVehiculos->placa = $params_array['placa'];
        //$tVehiculos->claseVehiculo = $params_array['claseVehiculo'];     
@@ -77,8 +112,9 @@ class TipoVehiculoController extends Controller
        $data = [
              'code' => 200,
              'status' => 'success',
-             'tipo' => $tVehiculos  
-           ];
+             'tipo' => $tVehiculos,   
+             'tvehiculos' => $tpVehiculos
+           ]; */
          }
          
        }else{
@@ -89,6 +125,7 @@ class TipoVehiculoController extends Controller
            ];
        }
        //devolver resultado
+       //return response()->json($data);
        return response()->json($data, $data['code']); 
     }
     //actualizacion de categoria
