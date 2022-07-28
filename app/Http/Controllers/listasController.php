@@ -109,9 +109,12 @@ class listasController extends Controller
             if(!empty($params_array)){//si no esta nulo continua con la validacion
             //Validar los datos
             $validate = \Validator::make($params_array,[
-               'codigo' => 'required',
+               //'codigo' => 'required',
                //'nombre' => 'required',
-               'placa' => 'required',                       
+               'placa' => 'required',  
+               'fechainicio' => 'required',
+               'fechafin' => 'required',
+               'url' => 'required',               
                //'id_vehiculos' => 'required', //verificar que necesito realmente 
             ]);
             
@@ -123,20 +126,22 @@ class listasController extends Controller
                ];
                 
             }else{
-                $lista = tDocumentos::where('id', $params_array['id'])//pide el id para llamar la categoria estaba con id le cambie a codigo 
-                ->update(['tipoVehiculo'=>$params_array['tipoVehiculo']]);//actualiza solo le parametro de calseVEhiculo
-                           
+            
+                $lista = lista::where('placa', $params_array['placa'])//pide el id para llamar la categoria estaba con id le cambie a codigo 
+                ->update(['fechainicio'=>$params_array['fechainicio']])                
+                ->update(['fechafin' =>$params_array['fechafin']])
+                ->update(['url' =>$params_array['url']]);           
                 $data = [
                  'code' => 200,
-                 'status' => 'success',
-                 'tipo' => $params_array  
+                 'status' => 'success'
+                 //'tipo' => $params_array  
                ];   
             }        
         }else{
             $data = [
                  'code' => 400,
                  'status' => 'error',
-                 'message' => 'No se ha enviado ninguna categoria'  
+                 'message' => 'No se ha actualizado la lista'  
                ];
             }
             //Devolver respuesta
